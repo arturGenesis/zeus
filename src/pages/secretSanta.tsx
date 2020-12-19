@@ -69,7 +69,7 @@ export default function SecretSanta() {
     }
 
     const recipientName = recipient.name;
-    const recipientIndex = receive.indexOf(recipient);
+    const recipientIndex = this.receive.indexOf(recipient);
 
     this.receive.splice(recipientIndex, 1);
     give.splice(personIndex, 1);
