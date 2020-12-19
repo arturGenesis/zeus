@@ -37,7 +37,7 @@ export default function SecretSanta() {
 
     for (let i = give.length - 1; i >= 0; i--) {
       const option = document.createElement('option');
-      option.value = i;
+      option.value = String(i);
       option.innerHTML = give[i].name;
 
       this.people.appendChild(option);
