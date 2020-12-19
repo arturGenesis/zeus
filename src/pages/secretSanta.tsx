@@ -110,15 +110,19 @@ export default function SecretSanta() {
       <BasicMeta url={"/"} />
       <OpenGraphMeta url={"/"} />
       <TwitterCardMeta url={"/"} />
-      <div class="wrapper">
+      <div className="wrapper">
         <h1>Secret Santa</h1>
-        <div class="select-wrap" id="peopleWrap">
+        <div className="select-wrap" id="peopleWrap">
           <select id="people"></select>
-          <span class="arrow"></span>
+          <span className="arrow"></span>
         </div>
-        <div><button id="choose" onClick={onChooseClick}>Хто мені попався (попалася)?</button></div>
+        <div>
+	  <button id="choose" onClick={onChooseClick}>Хто мені попався (попалася)?</button>
+	</div>
         <div id="result"></div>
-        <div class="close"><span id="close" onClick={onCloseClick}></span></div>
+        <div className="close">
+	  <span id="close" onClick={onCloseClick}></span>
+	</div>
       </div>
     </Layout>
   );
