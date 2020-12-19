@@ -13,7 +13,7 @@ export default function Navigation() {
         <ul>
           <li>
             <Link href="/">
-              <a className={router.pathname === "/" ? "active" : null}>about</a>
+              <a className={router.pathname === "/" ? "active" : null}>About</a>
             </Link>
           </li>
           <li>
@@ -23,7 +23,18 @@ export default function Navigation() {
                   router.pathname.startsWith("/posts") ? "active" : null
                 }
               >
-                blog
+                Blog
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/secretSanta">
+              <a
+                className={
+                  router.pathname.startsWith("/secretSanta") ? "active" : null
+                }
+              >
+                Secret Santa
               </a>
             </Link>
           </li>
