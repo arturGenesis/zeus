@@ -21,14 +21,14 @@ const give = [{
 
 export default function SecretSanta() {
   useEffect(() => {
-    drawList();
-
     this.receive = give.concat();
     this.peopleWrap = document.getElementById('peopleWrap');
     this.people = document.getElementById('people');
     this.choose = document.getElementById('choose');
     this.result = document.getElementById('result');
     this.close = document.getElementById('close');
+    
+    drawList();
   });
 
   const drawList = () => {
