@@ -19,13 +19,18 @@ if (!MONGODB_DB) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
+interface IMongo {
+  conn: any;
+  promise: Promise<any>;
+}
+
 declare global {
   namespace NodeJS {
     interface Global {
       document: Document;
       window: Window;
       navigator: Navigator;
-      mongo: any;
+      mongo: IMongo;
     }
   }
 }
@@ -33,7 +38,7 @@ declare global {
 let cached = global.mongo
 
 if (!cached) {
-  global.mongo = {};
+  global.mongo = {} as IMongo;
   cached = global.mongo;
 }
 
@@ -43,7 +48,7 @@ export async function connectToDatabase() {
   }
 
   if (!cached.promise) {
-    const conn = {}
+    const conn = {} as any;
 
     const opts = {
       useNewUrlParser: true,
