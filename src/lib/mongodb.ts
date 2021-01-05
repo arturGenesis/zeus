@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import Global from './global';
 
 const { MONGODB_URI, MONGODB_DB } = process.env
 
@@ -20,10 +19,22 @@ if (!MONGODB_DB) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
+declare global {
+  namespace NodeJS {
+    interface Global {
+      document: Document;
+      window: Window;
+      navigator: Navigator;
+      mongo: any;
+    }
+  }
+}
+
 let cached = global.mongo
 
 if (!cached) {
-  cached = global.mongo = {}
+  global.mongo = {};
+  cached = global.mongo;
 }
 
 export async function connectToDatabase() {
