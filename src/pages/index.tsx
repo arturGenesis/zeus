@@ -5,7 +5,7 @@ import TwitterCardMeta from "../components/meta/TwitterCardMeta";
 import { SocialList } from "../components/SocialList";
 import { connectToDatabase } from '../lib/mongodb';
 
-export default function Index({ isConnected }) {
+export default function Index() {
   return (
     <Layout>
       <BasicMeta url={"/"} />
@@ -18,14 +18,6 @@ export default function Index({ isConnected }) {
           </h1>
           <span className="handle">@nextjs-netlify-blog</span>
           <h2>A blog template with Next.js and Netlify.</h2>
-          {isConnected ? (
-            <h2 className="subtitle">You are connected to MongoDB</h2>
-          ) : (
-            <h2 className="subtitle">
-              You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-              for instructions.
-            </h2>
-          )}
           <SocialList />
         </div>
       </div>
@@ -68,14 +60,4 @@ export default function Index({ isConnected }) {
       `}</style>
     </Layout>
   );
-}
-
-export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
-
-  const isConnected = await client.isConnected()
-
-  return {
-    props: { isConnected },
-  }
 }
