@@ -1,4 +1,5 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient } from 'mongodb';
+import Global from './global';
 
 const { MONGODB_URI, MONGODB_DB } = process.env
 
