@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import BasicMeta from "../components/meta/BasicMeta";
 import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../components/meta/TwitterCardMeta";
+import { connectToDatabase } from "../lib/mongodb";
 
 enum SEX {
   MALE = 'male',
@@ -30,7 +31,7 @@ const list: IPerson[] = [{
 	name: 'Діма',    sex: SEX.MALE,   blackList: ['Настя'],   id: 6
 }];
 
-export default function SecretSanta() {
+export default function SecretSanta({ movies = [] }) {
   const [givers, setGivers] = useState(list);
   const [giver, setGiver] = useState({} as IPerson | null);
   const [recipients, setRecipients] = useState([...list]);
@@ -108,6 +109,21 @@ export default function SecretSanta() {
             <span id="close" onClick={onCloseClick}>Добре. Видалити це повідомлення.</span>
           )}
         </div>
+      </div>
+
+      <div className="wrapper">
+        <h2>Top 20 Movies of All Time</h2>
+        <p>
+          <small>(According to Metacritic)</small>
+        </p>
+        <ol>
+          {movies.map((movie) => (
+            <li key={movie._id}>
+              <h3>{movie.metacritic} {movie.title}</h3>
+              <p>{movie.plot}</p>
+            </li>
+          ))}
+        </ol>
       </div>
 
       <style jsx>{`
@@ -222,4 +238,19 @@ export default function SecretSanta() {
       `}</style>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const { db } = await connectToDatabase();
+  const movies = await db
+    .collection("movies")
+    .find({})
+    .sort({ metacritic: -1 })
+    .limit(20)
+    .toArray();
+  return {
+    props: {
+      movies: JSON.parse(JSON.stringify(movies)),
+    },
+  };
 }

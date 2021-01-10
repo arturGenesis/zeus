@@ -10,10 +10,24 @@ tags:
 
 MDX supports to import React component and embed it directly as markdown content.
 
+## Instagram with react-instagram-embed
+
+import InstagramEmbed from "react-instagram-embed";
+
+<InstagramEmbed
+  url="https://instagr.am/p/Zw9o4/"
+  maxWidth={320}
+  hideCaption={true}
+/>
+
 ## YouTube with react-youtube
 
 import YouTube from "react-youtube";
 
-<p>
-  <YouTube videoId={"2g811Eo7K8U"} containerClassName={"youtube-container"} />
-</p>
+<YouTube videoId={"2g811Eo7K8U"} containerClassName={"youtube-container"} />
+
+## Twitter with react-twitter-embed
+
+import { TwitterTweetEmbed } from "react-twitter-embed";
+
+<TwitterTweetEmbed tweetId={"933354946111705097"} />
